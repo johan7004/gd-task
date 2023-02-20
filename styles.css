@@ -1,0 +1,24 @@
+body {
+  display: flex;
+}
+li {
+  list-style: none;
+  padding: 0.5rem;
+}
+
+.form__input {
+  margin: 0.8rem auto;
+}
+
+h3 {
+  text-align: center;
+}
+
+input {
+  min-width: 20rem;
+  height: auto;
+}
+
+a {
+  padding: 1rem;
+}

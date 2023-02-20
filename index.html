@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Links Loading and Storing</title>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div>
+      <form>
+        <label class="form__label">Enter your URLs:</label>
+        <br />
+        <input class="form__input url-input" type="text" name="url1" /><br />
+        <input class="form__input url-input" type="text" name="url2" /><br />
+        <input class="form__input url-input" type="text" name="url3" /><br />
+        <input class="form__input url-input" type="text" name="url4" /><br />
+        <input class="form__input url-input" type="text" name="url5" /><br />
+        <input class="form__input url-input" type="text" name="url6" /><br />
+        <input class="form__input url-input" type="text" name="url7" /><br />
+        <input class="form__input url-input" type="text" name="url8" /><br />
+        <input class="form__input url-input" type="text" name="url9" /><br />
+        <input class="form__input url-input" type="text" name="url10" /><br />
+        <label>Name for your test batch:</label>
+        <br />
+        <input
+          class="form__input batch-name__input"
+          required
+          type="text"
+          name="batchname"
+        /><br />
+        <button
+          id="store-links-button"
+          class="form__button"
+          type="button"
+          onclick="formValidation(this.id)"
+        >
+          Store these test links
+        </button>
+        <button
+          id="load-links-button"
+          class="form__button"
+          type="button"
+          onclick="formValidation(this.id)"
+        >
+          Load test links
+        </button>
+        <button
+          id="load-links-firefox"
+          class="form__button"
+          type="button"
+          onclick="formValidation(this.id)"
+        >
+          Load links in Firefox
+        </button>
+        <button
+          id="load-links-edge"
+          class="form__button"
+          type="button"
+          onclick="formValidation(this.id)"
+        >
+          Load test links in Edge
+        </button>
+      </form>
+
+      <h2>Reload stored test links</h2>
+      <button type="button" onclick="window.location.reload()">
+        Reload results
+      </button>
+      <div class="links__list"></div>
+      <button
+        id="load-stored-links"
+        type="button"
+        onclick="loadAllStoredTestLinks()"
+      >
+        Load these test links
+      </button>
+    </div>
+    <div>
+      <h3>If Links does not load on Browsers please check the following:</h3>
+      <ul>
+        <li>Check if there is any pop-up blocker, if please disable it</li>
+        <li>
+          Check if the browser does not restrict URL to be openend using
+          scripts, if remove the restrictions
+        </li>
+        <li>Check if Firefox and edge is installed properly</li>
+        <li>
+          Check if the protocol handler is created on your system for 'firefox'
+          and 'microsoft-edge'
+        </li>
+      </ul>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
