@@ -5,23 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Links Loading and Storing</title>
-    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div>
       <form>
         <label class="form__label">Enter your URLs:</label>
         <br />
-        <input class="form__input url-input" type="text" name="url1" /><br />
-        <input class="form__input url-input" type="text" name="url2" /><br />
-        <input class="form__input url-input" type="text" name="url3" /><br />
-        <input class="form__input url-input" type="text" name="url4" /><br />
-        <input class="form__input url-input" type="text" name="url5" /><br />
-        <input class="form__input url-input" type="text" name="url6" /><br />
-        <input class="form__input url-input" type="text" name="url7" /><br />
-        <input class="form__input url-input" type="text" name="url8" /><br />
-        <input class="form__input url-input" type="text" name="url9" /><br />
-        <input class="form__input url-input" type="text" name="url10" /><br />
+        <div class="form__container">
+          <input class="form__input url-input" type="text" id="url-1" />
+        </div>
+        <button onclick="addUrlInput()" type="button" class="add__input">
+          +</button
+        ><br />
         <label>Name for your test batch:</label>
         <br />
         <input
@@ -91,6 +87,19 @@
           and 'microsoft-edge'
         </li>
       </ul>
+    </div>
+    <div class="modal__input">
+      <form>
+        <input
+          required
+          id="new-url"
+          class="new-url-form__input"
+          placeholder="Enter Additional Url"
+        />
+        <button id="new-url-button" class="new-url-form__btn" type="button">
+          Add Url
+        </button>
+      </form>
     </div>
     <script src="./script.js"></script>
   </body>

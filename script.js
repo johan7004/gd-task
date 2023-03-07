@@ -7,20 +7,40 @@ const linksList = document.querySelector(".links__list");
 let validInputValues = []; // inital state
 const totalStoredLinks = [];
 
+function addUrlToBatch(testBatchList, testBatchKey) {
+  console.log(testBatchList);
+  const modalToggle = document.querySelector(".modal__input");
+  modalToggle.style.display = "block";
+  const newUrlButton = document.querySelector("#new-url-button");
+  const newUrlInput = document.querySelector("#new-url");
+  newUrlButton.addEventListener("click", () => {
+    if (newUrlInput.value) {
+      testBatchList[testBatchKey].testLinks.push(newUrlInput.value);
+      console.log(newUrlInput.value);
+      modalToggle.style.display = "none";
+    }
+  });
+}
+
 function loadStoredLinks() {
   const storedLinks = JSON.parse(localStorage.getItem("links"));
   if (storedLinks && storedLinks.length) {
     validInputValues = [...storedLinks];
 
-    storedLinks.forEach((links) => {
+    storedLinks.forEach((links, key) => {
       const testBatchName = links.batchName;
       const batchNameTitle = document.createElement("h3");
       const storedLinksList = document.createElement("ul");
+      const addUrlToBatchBtn = document.createElement("button");
+      addUrlToBatchBtn.className = "add__input";
+      addUrlToBatchBtn.innerText = "+";
+      addUrlToBatchBtn.onclick = () => addUrlToBatch(storedLinks, key);
       storedLinksList.className = "stored-links";
       batchNameTitle.innerText = `Test Batch Name : ${testBatchName}`;
       batchNameTitle.className = "batch-name__title";
       linksList.appendChild(batchNameTitle);
       linksList.appendChild(storedLinksList);
+      linksList.appendChild(addUrlToBatchBtn);
 
       links.testLinks.forEach((testLink) => {
         const testLinksListElement = document.createElement("li");
@@ -49,10 +69,22 @@ function storeValidLinks(validLinks) {
   return;
 }
 
+function addUrlInput() {
+  const inputFieldcContainer = document.querySelector(".form__container");
+  const inputFieldsUpdate = document.querySelectorAll(".url-input");
+
+  const newInputField = document.createElement("input");
+  newInputField.className = "form__input url-input";
+  newInputField.id = `url-${inputFieldsUpdate.length + 1}`;
+  inputFieldcContainer.appendChild(newInputField);
+  console.log(`adding url Inputs`);
+}
+
 function formValidation(button_id) {
   if (batchNameInput.value) {
     const inputValues = [];
-    urlInputFields.forEach((elem, index) => {
+    const updatedInputField = document.querySelectorAll(".url-input");
+    updatedInputField.forEach((elem, index) => {
       if (elem.value) {
         if (elem.value.includes(`https`)) {
           inputValues.push(elem.value);
