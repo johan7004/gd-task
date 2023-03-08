@@ -15,10 +15,6 @@ function addUrlToBatch(testBatchList, testBatchKey) {
   newUrlButton.addEventListener("click", () => {
     if (newUrlInput.value) {
       testBatchList[testBatchKey].testLinks.push(newUrlInput.value);
-      console.log(`newUrlInput.value`);
-      console.log(newUrlInput.value);
-      console.log(`newUrlInput.value`);
-      console.log(testBatchList);
       localStorage.setItem("links", JSON.stringify(testBatchList));
       modalToggle.style.display = "none";
       location.reload();
@@ -27,10 +23,8 @@ function addUrlToBatch(testBatchList, testBatchKey) {
 }
 
 function removeUrlFromBatch(testBatchList, batchKey, linkKey) {
-  console.log(`remove url from batch ${batchKey} and link number ${linkKey}`);
-  console.log(`from remove function`);
-  console.log(testBatchList[batchKey].testLinks.splice(linkKey, 1));
-  console.log(testBatchList);
+  testBatchList[batchKey].testLinks.splice(linkKey, 1);
+
   localStorage.setItem("links", JSON.stringify(testBatchList));
   location.reload();
 }
@@ -95,7 +89,6 @@ function addUrlInput() {
   newInputField.className = "form__input url-input";
   newInputField.id = `url-${inputFieldsUpdate.length + 1}`;
   inputFieldcContainer.appendChild(newInputField);
-  console.log(`adding url Inputs`);
 }
 
 function formValidation(button_id) {
@@ -119,7 +112,6 @@ function formValidation(button_id) {
       ];
       switch (button_id) {
         case "store-links-button":
-          console.log(button_id);
           storeValidLinks(validInputValues);
           alert(`Links Stored Successfully`);
           window.location.reload();
@@ -131,9 +123,6 @@ function formValidation(button_id) {
           }
           break;
         case "load-links-firefox":
-          console.log(`firefox event`);
-          console.log("Loading links in Firefox");
-          console.log("Loading links in Firefox");
           try {
             inputValues.forEach((value) => {
               const firefoxURL = `firefox:${value}`;
