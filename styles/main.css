@@ -1,5 +1,6 @@
 body {
   display: flex;
+  font-family: "Fira Sans Condensed", sans-serif;
 }
 
 li {
@@ -57,15 +58,41 @@ a {
   padding: 1rem;
   scale: 1;
   transition: scale 1s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .links__list .stored-links li:hover {
-  scale: 1.2;
+  scale: 1.1;
+}
+.links__list .stored-links li span {
+  font-size: 1.5rem;
+  color: red;
+  cursor: pointer;
 }
 .links__list .stored-links a {
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin: auto;
   text-decoration: none;
-  color: red;
+  color: rgb(107, 107, 241);
+}
+
+.test-btn__container {
+  display: flex;
+}
+.test-btn__container button {
+  margin: 1rem;
+  padding: 1rem;
+  background: none;
+  border: 4px solid;
+  -o-border-image: linear-gradient(#18045f, #a7bbf0) 10;
+     border-image: linear-gradient(#18045f, #a7bbf0) 10;
+  transition: background 1s;
+  cursor: pointer;
+}
+.test-btn__container button:hover {
+  background-color: #18045f;
+  color: white;
 }
 
 .modal__input {

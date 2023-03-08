@@ -8,7 +8,6 @@ let validInputValues = []; // inital state
 const totalStoredLinks = [];
 
 function addUrlToBatch(testBatchList, testBatchKey) {
-  console.log(testBatchList);
   const modalToggle = document.querySelector(".modal__input");
   modalToggle.style.display = "block";
   const newUrlButton = document.querySelector("#new-url-button");
@@ -16,10 +15,24 @@ function addUrlToBatch(testBatchList, testBatchKey) {
   newUrlButton.addEventListener("click", () => {
     if (newUrlInput.value) {
       testBatchList[testBatchKey].testLinks.push(newUrlInput.value);
+      console.log(`newUrlInput.value`);
       console.log(newUrlInput.value);
+      console.log(`newUrlInput.value`);
+      console.log(testBatchList);
+      localStorage.setItem("links", JSON.stringify(testBatchList));
       modalToggle.style.display = "none";
+      location.reload();
     }
   });
+}
+
+function removeUrlFromBatch(testBatchList, batchKey, linkKey) {
+  console.log(`remove url from batch ${batchKey} and link number ${linkKey}`);
+  console.log(`from remove function`);
+  console.log(testBatchList[batchKey].testLinks.splice(linkKey, 1));
+  console.log(testBatchList);
+  localStorage.setItem("links", JSON.stringify(testBatchList));
+  location.reload();
 }
 
 function loadStoredLinks() {
@@ -27,14 +40,14 @@ function loadStoredLinks() {
   if (storedLinks && storedLinks.length) {
     validInputValues = [...storedLinks];
 
-    storedLinks.forEach((links, key) => {
+    storedLinks.forEach((links, testBatchKey) => {
       const testBatchName = links.batchName;
       const batchNameTitle = document.createElement("h3");
       const storedLinksList = document.createElement("ul");
       const addUrlToBatchBtn = document.createElement("button");
       addUrlToBatchBtn.className = "add__input";
       addUrlToBatchBtn.innerText = "+";
-      addUrlToBatchBtn.onclick = () => addUrlToBatch(storedLinks, key);
+      addUrlToBatchBtn.onclick = () => addUrlToBatch(storedLinks, testBatchKey);
       storedLinksList.className = "stored-links";
       batchNameTitle.innerText = `Test Batch Name : ${testBatchName}`;
       batchNameTitle.className = "batch-name__title";
@@ -42,14 +55,19 @@ function loadStoredLinks() {
       linksList.appendChild(storedLinksList);
       linksList.appendChild(addUrlToBatchBtn);
 
-      links.testLinks.forEach((testLink) => {
+      links.testLinks.forEach((testLink, testLinkkey) => {
         const testLinksListElement = document.createElement("li");
         const testLinksUrl = document.createElement("a");
+        const urlDeleteButton = document.createElement("span");
         testLinksUrl.innerText = testLink;
         testLinksUrl.className = "test__links";
+        urlDeleteButton.innerHTML = "&times;";
+        urlDeleteButton.onclick = () =>
+          removeUrlFromBatch(storedLinks, testBatchKey, testLinkkey);
         testLinksUrl.href = testLink;
         testLinksListElement.appendChild(testLinksUrl);
         storedLinksList.appendChild(testLinksListElement);
+        testLinksListElement.appendChild(urlDeleteButton);
         totalStoredLinks.push(testLink);
       });
     });

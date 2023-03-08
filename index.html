@@ -5,11 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Links Loading and Storing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,100;0,400;0,600;1,300;1,400;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
     <link href="./styles/main.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div>
       <form>
+        <div class="test-btn__container">
+          <button
+            id="store-links-button"
+            class="form__button"
+            type="button"
+            onclick="formValidation(this.id)"
+          >
+            Store these test links 
+          </button>
+          <button
+            id="load-links-button"
+            class="form__button"
+            type="button"
+            onclick="formValidation(this.id)"
+          >
+            Load test links
+          </button>
+          <button
+            id="load-links-firefox"
+            class="form__button"
+            type="button"
+            onclick="formValidation(this.id)"
+          >
+            Load links in Firefox
+          </button>
+          <button
+            id="load-links-edge"
+            class="form__button"
+            type="button"
+            onclick="formValidation(this.id)"
+          >
+            Load test links in Edge
+          </button>
+        </div>
+        <br />
         <label class="form__label">Enter your URLs:</label>
         <br />
         <div class="form__container">
@@ -26,38 +67,6 @@
           type="text"
           name="batchname"
         /><br />
-        <button
-          id="store-links-button"
-          class="form__button"
-          type="button"
-          onclick="formValidation(this.id)"
-        >
-          Store these test links
-        </button>
-        <button
-          id="load-links-button"
-          class="form__button"
-          type="button"
-          onclick="formValidation(this.id)"
-        >
-          Load test links
-        </button>
-        <button
-          id="load-links-firefox"
-          class="form__button"
-          type="button"
-          onclick="formValidation(this.id)"
-        >
-          Load links in Firefox
-        </button>
-        <button
-          id="load-links-edge"
-          class="form__button"
-          type="button"
-          onclick="formValidation(this.id)"
-        >
-          Load test links in Edge
-        </button>
       </form>
 
       <h2>Reload stored test links</h2>
