@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
   switch (oneTrustState) {
     case "true":
       const scripts = document.getElementsByTagName("script");
-      oneTrustBtn.innerText = "Disable OneTrust Banner";
+      oneTrustBtn.innerText = "Enable OneTrust Banner";
+      oneTrustBannerText.style.display = "block";
       if (oneTrustContainer) oneTrustContainer.style.display = "none";
       document.head.insertAdjacentHTML(
         "beforeend",
@@ -30,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
       break;
     case "false":
-      oneTrustBtn.innerText = "Enable OneTrust Banner";
-      oneTrustBannerText.style.display = "block";
+      oneTrustBtn.innerText = "Disable OneTrust Banner";
+      oneTrustBannerText.style.display = "none";
     default:
       console.log(`one trustF`);
   }
