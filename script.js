@@ -1,11 +1,120 @@
 "use strict";
 
 const urlInputFields = document.querySelectorAll(".url-input");
-const batchNameInput = document.querySelector(".batch-name__input");
+const baetchNameInput = document.querySelector(".batch-name__input");
 const linksList = document.querySelector(".links__list");
-
+const cacheDisableBtn = document.querySelector("#disable-cache");
+const headTag = document.getElementsByTagName("head")[0];
+const cacheDisableText = document.querySelector(".cache-disable");
+const oneTrustBtn = document.getElementById("control-onetrust");
+const oneTrustContainer = document.getElementById("onetrust-consent-sdk");
+const oneTrustBannerText = document.getElementById("onetrust-banner-state");
 let validInputValues = []; // inital state
 const totalStoredLinks = [];
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  const oneTrustState = sessionStorage.getItem("oneTrustBanner");
+  switch (oneTrustState) {
+    case "true":
+      const scripts = document.getElementsByTagName("script");
+      oneTrustBtn.innerText = "Disable OneTrust Banner";
+      if (oneTrustContainer) oneTrustContainer.style.display = "none";
+      document.head.insertAdjacentHTML(
+        "beforeend",
+        `<style>.onetrust-consent-sdk{display:none;visibility:hidden;}</style>`
+      );
+      for (let elem of scripts) {
+        if (elem.src.includes("onetrust")) {
+          elem.remove();
+        }
+      }
+      break;
+    case "false":
+      oneTrustBtn.innerText = "Enable OneTrust Banner";
+      oneTrustBannerText.style.display = "block";
+    default:
+      console.log(`one trustF`);
+  }
+});
+
+function createCacheMetaTag() {
+  const metaTag = document.createElement("meta");
+  sessionStorage.setItem("cacheDisable", true);
+  metaTag.setAttribute("id", "cache-control");
+  metaTag.setAttribute("http-equiv", "Cache-Control");
+  metaTag.setAttribute("content", "no-cache, no-store, must-revalidate");
+  headTag.appendChild(metaTag);
+}
+
+function checkCachingState() {
+  const cacheState = sessionStorage.getItem("cacheDisable");
+
+  switch (cacheState) {
+    case undefined:
+    case null:
+      sessionStorage.setItem("cacheDisable", false);
+      break;
+    case "true":
+      sessionStorage.setItem("cacheDisable", cacheState);
+      cacheDisableBtn.innerText = "Enable Cache";
+      cacheDisableText.style.display = "block";
+      createCacheMetaTag();
+
+      break;
+    case "true":
+      sessionStorage.setItem("cacheDisable", false);
+      break;
+    default:
+      console.log(`default ${cacheState}`);
+      break;
+  }
+}
+checkCachingState();
+
+function toggleCaching() {
+  const cacheDisableState = sessionStorage.getItem("cacheDisable");
+
+  if (cacheDisableState === "false") {
+    cacheDisableBtn.innerText = "Enable Cache";
+    cacheDisableText.style.display = "block";
+    createCacheMetaTag();
+  } else {
+    const cacheMetaTag = document.getElementById("cache-control");
+    sessionStorage.setItem("cacheDisable", false);
+    if (cacheMetaTag) {
+      cacheMetaTag.remove();
+      console.log(`meta tag removed`);
+    }
+    cacheDisableBtn.innerText = "Disable Cache";
+    cacheDisableText.style.display = "none";
+  }
+}
+
+function deleteCache() {
+  window.location.reload(true);
+}
+
+function toggleOneTrust() {
+  const oneTrustState = sessionStorage.getItem("oneTrustBanner");
+  switch (oneTrustState) {
+    case "false":
+      sessionStorage.setItem("oneTrustBanner", true);
+      oneTrustBtn ? (oneTrustBtn.innerText = "Enable OneTrust Banner") : "";
+      oneTrustContainer ? (oneTrustContainer.style.display = "none") : "";
+      oneTrustBannerText.style.display = "block";
+      break;
+    case "true":
+      sessionStorage.setItem("oneTrustBanner", false);
+      oneTrustBtn.innerText = "Disable OneTrust Banner";
+      oneTrustContainer ? (oneTrustContainer.style.display = "block") : "";
+      oneTrustBannerText ? (oneTrustBannerText.style.display = "none") : "";
+
+      break;
+    default:
+      console.log(oneTrustState);
+      break;
+  }
+}
 
 function addUrlToBatch(testBatchList, testBatchKey) {
   const modalToggle = document.querySelector(".modal__input");

@@ -11,20 +11,67 @@
       href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,100;0,400;0,600;1,300;1,400;1,500;1,600&display=swap"
       rel="stylesheet"
     />
+    <script src="./onetrust.js"></script>
     <link href="./styles/main.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div>
-      <form>
+      <form class="main-form__container">
+        <div class="input__container">
+          <div class="form__container">
+            <label class="form__label">Enter your URLs:</label>
+
+            <input class="form__input url-input" type="text" id="url-1" />
+
+            <button onclick="addUrlInput()" type="button" class="add__input">
+              +</button
+            ><br />
+            <label>Name for your test batch:</label>
+
+            <input
+              class="form__input batch-name__input"
+              required
+              type="text"
+              name="batchname"
+            /><br />
+          </div>
+        </div>
         <div class="test-btn__container">
+          <div class="cache-btn__container">
+            <button
+              id="disable-cache"
+              class="form__button"
+              type="button"
+              onclick="toggleCaching()"
+            >
+              Disable Cache
+            </button>
+            <span class="cache-disable" style="display: none">
+              Cache is Disabled</span
+            >
+          </div>
+          <div class="onetrust-btn__container">
+            <button
+              id="control-onetrust"
+              class="form__button"
+              type="button"
+              onclick="toggleOneTrust()"
+            >
+              Disable OneTrust Banner
+            </button>
+            <span id="onetrust-banner-state" style="display: none"
+              >One Trust Banner is Disabled</span
+            >
+          </div>
           <button
-            id="store-links-button"
+            id="delete-cache"
             class="form__button"
             type="button"
-            onclick="formValidation(this.id)"
+            onclick="deleteCache()"
           >
-            Store these test links 
+            Delete Cache
           </button>
+
           <button
             id="load-links-button"
             class="form__button"
@@ -49,54 +96,53 @@
           >
             Load test links in Edge
           </button>
+          <button
+            id="store-links-button"
+            class="form__button"
+            type="button"
+            onclick="formValidation(this.id)"
+          >
+            Store these test links
+          </button>
         </div>
-        <br />
-        <label class="form__label">Enter your URLs:</label>
-        <br />
-        <div class="form__container">
-          <input class="form__input url-input" type="text" id="url-1" />
-        </div>
-        <button onclick="addUrlInput()" type="button" class="add__input">
-          +</button
-        ><br />
-        <label>Name for your test batch:</label>
-        <br />
-        <input
-          class="form__input batch-name__input"
-          required
-          type="text"
-          name="batchname"
-        /><br />
       </form>
+      <div class="main-links__container">
+        <div class="links-list__container">
+          <div class="links-list__container-header">
+            <h2>Reload stored test links</h2>
+            <button type="button" onclick="window.location.reload()">
+              Reload results
+            </button>
+            <button
+              id="load-stored-links"
+              type="button"
+              onclick="loadAllStoredTestLinks()"
+            >
+              Load these test links
+            </button>
+          </div>
+          <div class="links__list"></div>
+        </div>
+        <div>
+          <h3>
+            If Links does not load on Browsers please check the following:
+          </h3>
+          <ul>
+            <li>Check if there is any pop-up blocker, if please disable it</li>
+            <li>
+              Check if the browser does not restrict URL to be openend using
+              scripts, if remove the restrictions
+            </li>
+            <li>Check if Firefox and edge is installed properly</li>
+            <li>
+              Check if the protocol handler is created on your system for
+              'firefox' and 'microsoft-edge'
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-      <h2>Reload stored test links</h2>
-      <button type="button" onclick="window.location.reload()">
-        Reload results
-      </button>
-      <div class="links__list"></div>
-      <button
-        id="load-stored-links"
-        type="button"
-        onclick="loadAllStoredTestLinks()"
-      >
-        Load these test links
-      </button>
-    </div>
-    <div>
-      <h3>If Links does not load on Browsers please check the following:</h3>
-      <ul>
-        <li>Check if there is any pop-up blocker, if please disable it</li>
-        <li>
-          Check if the browser does not restrict URL to be openend using
-          scripts, if remove the restrictions
-        </li>
-        <li>Check if Firefox and edge is installed properly</li>
-        <li>
-          Check if the protocol handler is created on your system for 'firefox'
-          and 'microsoft-edge'
-        </li>
-      </ul>
-    </div>
     <div class="modal__input">
       <form>
         <input

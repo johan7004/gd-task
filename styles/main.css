@@ -1,6 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   font-family: "Fira Sans Condensed", sans-serif;
+  padding: 16px;
 }
 
 li {
@@ -25,6 +30,21 @@ a {
   padding: 1rem;
 }
 
+.main-form__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.main-form__container .input__container .form__container input {
+  border: none;
+  border-bottom: 1px solid;
+  font-size: 16px;
+  padding: 8px;
+}
+.main-form__container .input__container .form__container input[type=text]:focus {
+  outline: none;
+  border-bottom: 3px solid #18045f;
+}
+
 .form__container {
   display: flex;
   flex-direction: column;
@@ -46,45 +66,76 @@ a {
   color: white;
 }
 
-.links__list {
+.main-links__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.main-links__container .links-list__container {
+  text-align: center;
+}
+.main-links__container .links-list__container-header h2 {
+  letter-spacing: 3px;
+}
+.main-links__container .links-list__container-header button {
+  background: #1c2f66;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 0.5rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.main-links__container .links-list__container-header button:hover {
+  color: rgb(255, 0, 0);
+}
+.main-links__container .links-list__container .links__list {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-.links__list .stored-links li {
+.main-links__container .links-list__container .links__list .stored-links li {
   border: 2px solid black;
   border-radius: 5px;
   margin: 1rem;
   padding: 1rem;
-  scale: 1;
-  transition: scale 1s;
+  scale: 0.8;
+  transition: scale 0.5s;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.links__list .stored-links li:hover {
-  scale: 1.1;
+.main-links__container .links-list__container .links__list .stored-links li:hover {
+  scale: 0.9;
 }
-.links__list .stored-links li span {
+.main-links__container .links-list__container .links__list .stored-links li span {
   font-size: 1.5rem;
   color: red;
   cursor: pointer;
 }
-.links__list .stored-links a {
+.main-links__container .links-list__container .links__list .stored-links a {
   padding: 1rem;
   margin: auto;
   text-decoration: none;
   color: rgb(107, 107, 241);
 }
+.main-links__container .links-list__container .links__list .add__input {
+  width: -moz-min-content;
+  width: min-content;
+  margin: auto;
+}
 
 .test-btn__container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .test-btn__container button {
   margin: 1rem;
   padding: 1rem;
   background: none;
   border: 4px solid;
+  border-radius: 5px;
   -o-border-image: linear-gradient(#18045f, #a7bbf0) 10;
      border-image: linear-gradient(#18045f, #a7bbf0) 10;
   transition: background 1s;
@@ -94,15 +145,21 @@ a {
   background-color: #18045f;
   color: white;
 }
+.test-btn__container .cache-btn__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
 
 .modal__input {
   position: fixed;
   z-index: 999999999;
-  border: 4px solid red;
+  border: 4px solid;
   border-radius: 10px;
   width: 650px;
   height: 250px;
-  background: blue;
+  background: #18045f;
   right: 25%;
   top: 50%;
   margin: auto;
@@ -124,4 +181,7 @@ a {
 }
 .modal__input form button {
   width: 75%;
+  background-color: white;
+  font-size: 16px;
+  border-radius: 5px;
 }/*# sourceMappingURL=main.css.map */
